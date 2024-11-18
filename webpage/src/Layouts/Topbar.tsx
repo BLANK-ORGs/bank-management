@@ -108,9 +108,9 @@ const Topbar = ({ toggleMenu, navOpen }: TopbarProps) => {
 		}
 	}
 
-	const handleRightSideBar = () => {
-		updateSettings({ rightSidebar: ThemeSettings.rightSidebar.show })
-	}
+	// const handleRightSideBar = () => {
+	// 	updateSettings({ rightSidebar: ThemeSettings.rightSidebar.show })
+	// }
 	return (
 		<>
 			<div className="navbar-custom">
