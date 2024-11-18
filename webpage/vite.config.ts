@@ -4,12 +4,16 @@ import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '',
-  plugins: [react(),],
-  define: { 'process.env': {}, },
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "src"),
-    },
-  },
+	base: '',
+	plugins: [react()],
+	build: {
+		outDir: 'dist',
+		chunkSizeWarningLimit: 1000,
+	},
+	define: { 'process.env': {} },
+	resolve: {
+		alias: {
+			'@': path.resolve(__dirname, 'src'),
+		},
+	},
 })
