@@ -86,7 +86,7 @@ const StripedRows = () => {
 													<td>{record.location}</td>
 													<td>{record.number}</td>
 													<td>{record.gender}</td>
-													<td>
+													{/* <td>
 														<Button
 															variant="primary"
 															className="ms-2"
@@ -100,24 +100,11 @@ const StripedRows = () => {
 															}>
 															Contact
 														</Button>
-													</td>
+													</td> */}
 													<td>
 														<ModalSizes type="edit" data={record}>
 															<i className="ri-settings-3-line" />
 														</ModalSizes>
-														{/* <Button
-															variant="primary"
-															className="ms-2"
-															onClick={() =>
-																window.open(
-																	`https://truecaller.com/search/lk/+94${record.number
-																		.toString()
-																		.substring(1)}`,
-																	'_blank'
-																)
-															}>
-															Contact
-														</Button> */}
 													</td>
 												</tr>
 											)
@@ -476,6 +463,24 @@ const ModalSizes = ({
 							containerClass="mb-3"
 							onChange={handleChange}
 						/>
+
+						<Button
+							variant="info"
+							className="mt-2"
+							disabled={!formData.number}
+							onClick={() => {
+								const phoneNumber = formData.number
+								const formattedNumber = phoneNumber.startsWith('0')
+									? phoneNumber.substring(1)
+									: phoneNumber
+								window.open(
+									`https://truecaller.com/search/lk/+94${formattedNumber}`,
+									'_blank'
+								)
+							}}>
+							Search Customer
+						</Button>
+
 						<FormInput
 							label="Address"
 							type="text"

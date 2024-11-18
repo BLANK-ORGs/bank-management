@@ -29561,3 +29561,5 @@
 2024-11-18T05:38:01.580Z [INFO]: Incoming request: GET /api/area/all?page=1&limit=100000
 2024-11-18T05:38:01.588Z [INFO]: Incoming request: GET /api/customer/all-customers?page=1&limit=20
 2024-11-18T05:48:47.756Z [INFO]: Incoming request: GET /api/user-task/all?search=&page=1&limit=10000
+2024-11-18T14:02:49.943Z [INFO]: listening on port 3000
+2024-11-18T14:03:29.714Z [INFO]: Database Connected
