@@ -5,15 +5,16 @@ import { BrowserRouter } from 'react-router-dom'
 import 'regenerator-runtime/runtime'
 import { store } from './store'
 
+//nothing
 const container = document.getElementById('root')
 if (container) {
 	const root = createRoot(container)
 	root.render(
 		// <React.StrictMode>
-		<Provider store={store}> 
-		<BrowserRouter basename={''}>
-			<App />
-		</BrowserRouter>
+		<Provider store={store}>
+			<BrowserRouter basename={''}>
+				<App />
+			</BrowserRouter>
 		</Provider>
 		// </React.StrictMode>,
 	)
