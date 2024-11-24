@@ -1,13 +1,23 @@
-
 import { FormInput, PageBreadcrumb } from '@/components'
 import PaginationWithStates from '@/components/Pagination'
-import { useAreaCreateMutation, useAreaUpdateMutation, useGetAllAreasQuery } from '@/features/api/areaSlice'
+import {
+	useAreaCreateMutation,
+	useAreaUpdateMutation,
+	useGetAllAreasQuery,
+} from '@/features/api/areaSlice'
 import { useGetAllEmployeesQuery } from '@/features/api/employeeSlice'
 import { useModal } from '@/hooks'
 import { toast } from 'material-react-toastify'
 import { useEffect, useState } from 'react'
 
-import { Button, Card, Modal, Placeholder, Spinner, Table } from 'react-bootstrap'
+import {
+	Button,
+	Card,
+	Modal,
+	Placeholder,
+	Spinner,
+	Table,
+} from 'react-bootstrap'
 
 const index = () => {
 	return (
@@ -24,16 +34,7 @@ const StripedRows = () => {
 	const [page, setPage] = useState(1)
 	const limit = 20
 
-
-	
-
-
-	const {data, isLoading: loading} = useGetAllAreasQuery({page, limit})
-
-
-
-
-
+	const { data, isLoading: loading } = useGetAllAreasQuery({ page, limit })
 
 	const handlePageChange = (page: number) => {
 		setPage(page)
@@ -72,9 +73,11 @@ const StripedRows = () => {
 															? record.employeeId.firstName
 															: ''}
 														&nbsp;
-														{record.employeeId ? record.employeeId.surName : ''}{' '}
+														{record.employeeId
+															? record.employeeId.surName
+															: ''}{' '}
 													</td>
-															<td>{record.date}</td>
+													<td>{record.date}</td>
 													<td>
 														<ModalSizes type="edit" data={record}>
 															<i className="ri-settings-3-line" />
@@ -95,7 +98,7 @@ const StripedRows = () => {
 														<Placeholder style={{ width: '25%' }} />
 													</Placeholder>
 												</td>
-												
+
 												<td>
 													<Placeholder as="p" animation="glow">
 														<Placeholder style={{ width: '25%' }} />
@@ -110,11 +113,11 @@ const StripedRows = () => {
 									  ))}
 							</tbody>
 						</Table>
-						{data?.totalPages > 1 && (	
-						<PaginationWithStates
-							pages={data?.totalPages}
-							handlePageChange={handlePageChange}
-						/>
+						{data?.totalPages > 1 && (
+							<PaginationWithStates
+								pages={data?.totalPages}
+								handlePageChange={handlePageChange}
+							/>
 						)}
 					</div>
 				</Card.Body>
@@ -139,17 +142,15 @@ const ModalSizes = ({
 }) => {
 	const { isOpen, size, className, scroll, toggleModal, openModalWithSize } =
 		useModal()
-	
-	
-	const [createArea , {isLoading: createLoading}] = useAreaCreateMutation()
-	const [updateArea , {isLoading: updateLoading}] = useAreaUpdateMutation()
-	
+
+	const [createArea, { isLoading: createLoading }] = useAreaCreateMutation()
+	const [updateArea, { isLoading: updateLoading }] = useAreaUpdateMutation()
+
 	const [formData, setFormData] = useState<any>({
 		name: '',
 		date: '',
 		employeeId: '',
 	})
-	
 
 	useEffect(() => {
 		if (type === 'edit') {
@@ -173,15 +174,14 @@ const ModalSizes = ({
 	const [page] = useState(1)
 	const limit = 10000
 
-	const { data:userData } = useGetAllEmployeesQuery({ page, limit })
-	
+	const { data: userData } = useGetAllEmployeesQuery({ page, limit })
 
 	const onSubmit = async () => {
 		try {
-			let response 
-			if(type === 'edit'){
-				response = await updateArea({formData, id: data._id}).unwrap()
-			}else {
+			let response
+			if (type === 'edit') {
+				response = await updateArea({ formData, id: data._id }).unwrap()
+			} else {
 				response = await createArea(formData).unwrap()
 				setFormData({
 					name: '',
@@ -191,14 +191,14 @@ const ModalSizes = ({
 			}
 			toast.success(response.message)
 			toggleModal()
-		} catch (err:any) {
-			if(err.status === 400 || err.status === 401) {
+		} catch (err: any) {
+			if (err.status === 400 || err.status === 401) {
 				toast.error(err.data.message)
-			}else if (err.status === 500) {
+			} else if (err.status === 500) {
 				console.log(err)
-			}else{
+			} else {
 				console.log(err)
-				toast.error("Something went wrong")
+				toast.error('Something went wrong')
 			}
 		}
 	}
@@ -230,16 +230,17 @@ const ModalSizes = ({
 								onChange={handleChange}
 								containerClass="mb-3"
 							/>
-							
-							
-							<FormInput
+
+							{/* <FormInput
 								label="Collecting Date"
 								type="date"
 								name="date"
 								value={formData.date}
 								onChange={handleChange}
 								containerClass="mb-3"
-							/>
+							/> */}
+
+							{/* Area Master Date remove */}
 							<FormInput
 								name="employeeId"
 								label="Employee"
@@ -248,7 +249,9 @@ const ModalSizes = ({
 								className="form-select"
 								value={formData?.employeeId?._id}
 								onChange={handleChange}>
-								<option defaultValue={''} value={''}>Select..</option>
+								<option defaultValue={''} value={''}>
+									Select..
+								</option>
 
 								{(userData?.users || []).map((record: any, idx: number) => (
 									<option key={idx} value={record._id}>
@@ -262,7 +265,12 @@ const ModalSizes = ({
 						<Button variant="light" onClick={toggleModal}>
 							Close
 						</Button>{' '}
-						<Button onClick={onSubmit}>{(createLoading || updateLoading) && <Spinner size='sm' className='me-2' /> }Save changes</Button>
+						<Button onClick={onSubmit}>
+							{(createLoading || updateLoading) && (
+								<Spinner size="sm" className="me-2" />
+							)}
+							Save changes
+						</Button>
 					</Modal.Footer>
 				</Modal>
 			</div>

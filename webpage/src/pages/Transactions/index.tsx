@@ -649,8 +649,6 @@ const ModalSizes = ({
 								containerClass="mb-3"
 							/>
 
-							
-
 							<FormInput
 								label="# Of Installments"
 								type="number"
@@ -679,6 +677,7 @@ const ModalSizes = ({
 								onChange={handleChange}
 								containerClass="mb-3"
 							/>
+							{/* No Issue Found */}
 							<div className="bg-light rounded p-1 mb-3"></div>
 							<h4>Collecting Type</h4>
 							<FormInput
