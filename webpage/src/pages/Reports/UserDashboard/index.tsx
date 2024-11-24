@@ -342,7 +342,7 @@ const ModalSizes = ({
 								containerClass="mb-3"
 							/>
 							<FormInput
-								label="Collating Amount"
+								label="Collating Date"
 								type="date"
 								name="collatingAmount"
 								value={String(formData.date).split('T')[0]}
